@@ -1,0 +1,2 @@
+import(mgcv, sn, mnormt, MASS, moments, splines, parallel)
+exportPattern("^[[:alpha:]]+")
