@@ -61,7 +61,7 @@ A list with two components:
 }
 \references{
 [1]. Meng Li, Ana-Maria Staicu and Howard D. Bondell (2013), Incorporating Covariates in Skewed Functional Data Models. 
-Unpublished. 
+\url{http://www.stat.ncsu.edu/information/library/papers/mimeo2654_Li.pdf}. 
 }
 
 \note{

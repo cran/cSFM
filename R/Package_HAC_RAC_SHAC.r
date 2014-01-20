@@ -221,7 +221,7 @@ case2.b.initial <- function(y, tp, cp, nbasis.mean = 10, gam.method = "REML",
     
     if (skew.method == "mle"){
       est.skew = as.vector(unlist(lapply(1:n.tim, function(k) 
-        sn.mle(y = scale.data[,k], plot.it=F)$cp["skewness"])))
+        coef(selm(scale.data[,k] ~ 1, family = "SN"))["gamma1"])))
     }
     
     est.shape <- sapply(est.skew, shape.dp)     
@@ -379,8 +379,8 @@ cSFM.est <- function(data, tp, cp, nknots.tp, nknots.cp, degree.poly = c(3, 3, 3
     copula <- matrix(NA, nrow(data), ncol(data))
     for (l1 in 1:nrow(data)){
       for (l2 in 1:ncol(data)){
-        temp.dp <- cp.to.dp(c(cp.est$mean[l1,l2], 
-                              sqrt(cp.est$var[l1,l2]), cp.est$skew[l2]))
+        temp.dp <- cp2dp(c(cp.est$mean[l1,l2], 
+                              sqrt(cp.est$var[l1,l2]), cp.est$skew[l2]), family = "SN")
         copula[l1,l2] <- psn(data[l1,l2], dp = temp.dp)
       }
     }
@@ -448,7 +448,7 @@ fitted.cSFM <- function(object, quantile = TRUE, quantile.level = c(.50, .80, .9
     for(p in 1:length(quantile.level)){
       
       for (j in 1:ncol(est.col$mean)){
-        temp2 <- qsn(quantile.level[p], dp = cp.to.dp(c(0,1,est.col$skew[j])))
+        temp2 <- qsn(quantile.level[p], dp = cp2dp(c(0,1,est.col$skew[j]), family = "SN"))
         est.quantile[,j,p] <- est.col$mean[,j] + exp(est.col$logvar[,j]/2) * temp2      
       }
     }
@@ -640,7 +640,7 @@ predict.cSFM <- function (object, newdata, cp.valid, tp.valid = NULL, ...) {
       copula.p[ith, ] <- sapply(c(1:ncol(scale.y.p)), 
                                 function(k) ifelse(is.na(scale.y.p[ith, k]), NA, 
                                                    psn(scale.y.p[ith, k], 
-                                                       dp = cp.to.dp(c(0, 1, cp.p$skew[k])))))
+                                                       dp = cp2dp(c(0, 1, cp.p$skew[k]), family = "SN"))))
     }
   
   GP.p = matrix(sapply(copula.p, function(k) ifelse(is.na(k), NA, qnorm(k))), nrow(copula.p), ncol(copula.p))
@@ -679,7 +679,7 @@ predict.cSFM <- function (object, newdata, cp.valid, tp.valid = NULL, ...) {
   for (ith in 1:nrow(copula.pred)){
     sn.process[ith,] <- sapply(c(1:ncol(copula.pred)), 
                                function(k) qsn(copula.pred[ith, k],
-                                               dp=cp.to.dp(c(0,1,cp.p$skew[k])))) 
+                                               dp=cp2dp(c(0,1,cp.p$skew[k]), family = "SN"))) 
   }
   
   # prediction matrix

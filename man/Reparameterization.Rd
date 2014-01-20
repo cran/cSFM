@@ -45,7 +45,7 @@ journal of statistics, 171-178.
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{\code{\link{D.SN}}, \code{\link{cp.to.dp}}, \code{\link{dp.to.cp}}}
+\seealso{\code{\link{D.SN}}, \code{\link{cp2dp}}, \code{\link{dp2cp}}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 
 \examples{

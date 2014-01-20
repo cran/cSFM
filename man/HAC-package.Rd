@@ -14,8 +14,8 @@ modeled by a Gaussian copula.
 \tabular{ll}{
 Package: \tab cSFM\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2013-07-14\cr
+Version: \tab 1.1\cr
+Date: \tab 2014-01-20\cr
 License: \tab GPL-2\cr
 }
 The main function \code{\link{cSFM.est}} applies one of the proposed method \code{cSFM} and its variates \code{2cSFM}
@@ -28,7 +28,7 @@ the function \code{\link{cSFM.est.parallel}} allows parallel computing for vario
 
 \references{
 [1]. Meng Li, Ana-Maria Staicu and Howard D. Bondell (2013), Incorporating Covariates in Skewed Functional Data Models. 
-Unpublished. 
+\url{http://www.stat.ncsu.edu/information/library/papers/mimeo2654_Li.pdf}. 
 %~~ Literature or other references for background information ~~
 }
 %%~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
